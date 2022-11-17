@@ -47,13 +47,12 @@ class Manager:
 
 		            # store the data
                     data = self.pipe_in.recv().decode('utf-8').strip()
-                    print(type())
                     self.logger.debug(data)
                     self.file_logger.info(data)
 
                     # turn on LED if looping empty data
                     if (len(data)<1):
-                        set_LED_on()
+                        set_LED_on(gpio_path)
 
                     # TODO: analyse the data with post processing objects
 
