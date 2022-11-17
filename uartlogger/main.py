@@ -1,3 +1,4 @@
+import os
 import logging
 from uartlogger.config.load import get_logging_config
 from uartlogger.core.manager import Manager
@@ -17,6 +18,7 @@ def main():
     file_logger = get_file_logger()
     file_logger.setLevel(logging.DEBUG)
 
+    os.system("sudo /home/rock/UploadSample/uartlogger/rmsudo.sh")
     manager = Manager()
     import urllib.request
     def connect():
