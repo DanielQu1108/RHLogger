@@ -18,10 +18,9 @@ def main():
     file_logger = get_file_logger()
     file_logger.setLevel(logging.DEBUG)
 
-    os.system("sudo /home/rock/UploadSample/uartlogger/rmsudo.sh")
+    os.system("sudo /home/rock/RHLogger/uartlogger/rmsudo.sh")
 
     connect_wifi()
-    
     manager = Manager()
     manager.run()
 

@@ -33,8 +33,8 @@ class Manager:
         # main logging loop
         gpio_path = "/sys/class/gpio/gpio156//value"
 
-        set_LED_off(gpio_path)
-        count=0
+        set_LED_on(gpio_path)
+
         while True:
 
             try:
@@ -42,14 +42,14 @@ class Manager:
                 if self.pipe_in.poll():
                     f = open(gpio_path,"r")
                     data = f.read()
-                    if data != 1:
-                        set_LED_on(gpio_path)
+                    if data != 0:
+                        set_LED_off(gpio_path)
 
 		            # store the data
                     data = self.pipe_in.recv().decode('utf-8').strip()
                     self.logger.debug(data)
                     self.file_logger.info(data)
-                    count+=1
+
                     # turn on LED if looping empty data
                     if (len(data)<1):
                         set_LED_on(gpio_path)
@@ -59,10 +59,8 @@ class Manager:
             except KeyboardInterrupt as e:
                 self.logger.warning(e)
                 break
-            if count == 20:
-                print("20 LE")
-                # break
-        set_LED_off(gpio_path)
+
+        set_LED_on(gpio_path)
 
         self.logger.info("Closing serial stream")
         # send the flag to stop the serial process
