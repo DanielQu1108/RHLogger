@@ -31,10 +31,6 @@ class Manager:
         stream_proc.start()
 
         # main logging loop
-        f = open("/sys/class/gpio/gpio156//value","r")
-        data = f.read()
-        f.close
-        print(data)
 
         set_LED_on()
 
@@ -45,13 +41,17 @@ class Manager:
                 if self.pipe_in.poll():
                     f = open("/sys/class/gpio/gpio156//value","r")
                     data = f.read()
-                    if data != 0:
+                    if data != "0":
                         set_LED_off()
 
 		    # store the data
                     data = self.pipe_in.recv().decode('utf-8').strip()
                     self.logger.debug(data)
                     self.file_logger.info(data)
+
+                    # turn on LED if looping empty data
+                    if (len(data)<1):
+                        set_LED_on()
 
                     # TODO: analyse the data with post processing objects
 
