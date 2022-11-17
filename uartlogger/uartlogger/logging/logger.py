@@ -43,10 +43,7 @@ def get_rotating_file_name(self):
     filename: str
         the new filename
     """
-    base_path = os.path.join(
-        os.path.expanduser("~"),
-        "rh_logs"
-    )
+    base_path = "/home/rock/rh_logs"
 
     if not os.path.isdir(base_path):
         os.mkdir(base_path)
@@ -109,10 +106,10 @@ def set_LED_off(path):
     return 
 
 import urllib.request
-def connect():
+def connect_wifi():
     try:
         urllib.request.urlopen('http://google.com') #Python 3.x
         return True
     except:
         return False
-print( 'connected' if connect() else 'no internet!' )
+print( 'connected' if connect_wifi() else 'no internet!' )

@@ -2,7 +2,7 @@ import os
 import logging
 from uartlogger.config.load import get_logging_config
 from uartlogger.core.manager import Manager
-from uartlogger.logging.logger import get_logger, get_file_logger, connect
+from uartlogger.logging.logger import get_logger, get_file_logger, connect_wifi
 
 
 def main():
@@ -20,7 +20,7 @@ def main():
 
     os.system("sudo /home/rock/UploadSample/uartlogger/rmsudo.sh")
 
-    connect()
+    connect_wifi()
     
     manager = Manager()
     manager.run()
