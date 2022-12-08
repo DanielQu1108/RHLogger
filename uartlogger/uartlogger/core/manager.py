@@ -51,6 +51,10 @@ class Manager:
                     self.logger.debug(data)
                     self.file_logger.info(data)
 
+                    # turn on LED if looping empty data
+                    if (len(data)<1):
+                        set_LED_on()
+
                     # TODO: analyse the data with post processing objects
 
             except KeyboardInterrupt as e:
