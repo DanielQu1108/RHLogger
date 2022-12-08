@@ -92,18 +92,18 @@ def get_file_logger():
 
     return logger
 
-def set_LED_on():
+def set_LED_on(path):
     out="1"
     outb = out.encode("ascii")
-    f = open("/sys/class/gpio/gpio156//value","wb")
+    f = open(path,"wb")
     f.write(outb)
     f.close
     return 
 
-def set_LED_off():
+def set_LED_off(path):
     out="0"
     outb = out.encode("ascii")
-    f = open("/sys/class/gpio/gpio156//value","wb")
+    f = open(path,"wb")
     f.write(outb)
     f.close
     return 

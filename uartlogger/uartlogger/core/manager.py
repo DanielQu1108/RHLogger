@@ -31,25 +31,23 @@ class Manager:
         stream_proc.start()
 
         # main logging loop
-        f = open("/sys/class/gpio/gpio156//value","r")
-        data = f.read()
-        f.close
-        print(data)
+        gpio_path = "/sys/class/gpio/gpio156//value"
 
-        set_LED_on()
+        set_LED_on(gpio_path)
 
         while True:
 
             try:
                 # check for any data
                 if self.pipe_in.poll():
-                    f = open("/sys/class/gpio/gpio156//value","r")
+                    f = open(gpio_path,"r")
                     data = f.read()
                     if data != 0:
-                        set_LED_off()
+                        set_LED_off(gpio_path)
 
-		    # store the data
+		            # store the data
                     data = self.pipe_in.recv().decode('utf-8').strip()
+                    print(type())
                     self.logger.debug(data)
                     self.file_logger.info(data)
 
@@ -59,7 +57,7 @@ class Manager:
                 self.logger.warning(e)
                 break
 
-        set_LED_on()
+        set_LED_on(gpio_path)
 
         self.logger.info("Closing serial stream")
         # send the flag to stop the serial process
