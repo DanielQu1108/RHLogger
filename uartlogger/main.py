@@ -2,7 +2,7 @@ import os
 import logging
 from uartlogger.config.load import get_logging_config
 from uartlogger.core.manager import Manager
-from uartlogger.logging.logger import get_logger, get_file_logger
+from uartlogger.logging.logger import get_logger, get_file_logger, connect
 
 
 def main():
@@ -19,15 +19,10 @@ def main():
     file_logger.setLevel(logging.DEBUG)
 
     os.system("sudo /home/rock/UploadSample/uartlogger/rmsudo.sh")
+
+    connect()
+    
     manager = Manager()
-    import urllib.request
-    def connect():
-        try:
-            urllib.request.urlopen('http://google.com') #Python 3.x
-            return True
-        except:
-            return False
-    print( 'connected' if connect() else 'no internet!' )
     manager.run()
 
 
