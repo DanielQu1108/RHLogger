@@ -1,7 +1,7 @@
 from multiprocessing import Pipe, Process
 
 from uartlogger.core.serial import Stream
-from uartlogger.logging import get_logger, get_file_logger
+from uartlogger.logging import get_logger, get_file_logger, set_LED_on, set_LED_off
 
 class Manager:
 
@@ -36,11 +36,7 @@ class Manager:
         f.close
         print(data)
 
-        out="1"
-        outb = out.encode("ascii")
-        f = open("/sys/class/gpio/gpio156//value","wb")
-        f.write(outb)
-        f.close
+        set_LED_on()
 
         while True:
 
@@ -50,11 +46,7 @@ class Manager:
                     f = open("/sys/class/gpio/gpio156//value","r")
                     data = f.read()
                     if data != 0:
-                        out="0"
-                        outb = out.encode("ascii")
-                        f = open("/sys/class/gpio/gpio156//value","wb")
-                        f.write(outb)
-                        f.close
+                        set_LED_off()
 
 		    # store the data
                     data = self.pipe_in.recv().decode('utf-8').strip()
@@ -67,11 +59,7 @@ class Manager:
                 self.logger.warning(e)
                 break
 
-        out="1"
-        outb = out.encode("ascii")
-        f = open("/sys/class/gpio/gpio156//value","wb")
-        f.write(outb)
-        f.close
+        set_LED_on()
 
         self.logger.info("Closing serial stream")
         # send the flag to stop the serial process
