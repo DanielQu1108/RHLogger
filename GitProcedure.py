@@ -5,7 +5,7 @@ For setting up a new Git Repo:
     git add -A
     git commit -m "first commit"
     git branch -M main
-    git remote add origin https://github.com/DanielQu1108/UploadSample.git      Substitute with git link
+    git remote add origin https://github.com/DanielQu1108/RHLogger.git    
     git push -u origin main
 
 
@@ -18,8 +18,8 @@ For future changes:
 
 When it asks for username and password:
 
-    Usename: daniel.qu@mclaren.com
-    Password: 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
+    Usename: DanielQu1108
+    Password: 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
 
 Same on Rock Pi and vscode
 
