@@ -2,8 +2,7 @@
 
 sudo apt-get update
 sudo apt-get install python3-distutils
-y
-
+curl -sSL https://install.python-poetry.org | python3 -
 poetry config virtualenvs.in-project true
 git clone https://github.com/DanielQu1108/RHLogger.git
 cd RHLogger
