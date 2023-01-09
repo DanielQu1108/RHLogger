@@ -20,15 +20,22 @@ rock ALL=(ALL) NOPASSWD: /home/rock/RHLogger/uartlogger/rmsudo.sh
 cd ..
 cp startup.sh /home/rock/
 
-sudo chmod 777 startup.sh
-
 cd
+os.system("sudo /home/rock/RHLogger/uartlogger/rmsudo.sh")
+sudo hwclock --set --date="2012-12-15 20:49:00"
+sudo hwclock -s
+
+sudo chmod 777 startup.sh
 sh startup.sh
 
 sudo chmod 777 rh_logs
 
 in /etc/rc.local, insert:
 
- ./home/rock/startup.sh 2>&1 >> /home/rock/start2.txt 
+sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"
+
+./home/rock/startup.sh 2>&1 >> /home/rock/start2.txt 
+
+
 
 """
