@@ -61,8 +61,7 @@ class Manager:
 
                     # TODO: analyse the data with post processing objects
 
-                else:
-                    set_LED_on(gpio_path)
+
 
             except KeyboardInterrupt as e:
                 self.logger.warning(e)
