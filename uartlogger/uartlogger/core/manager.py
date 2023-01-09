@@ -1,5 +1,5 @@
 from multiprocessing import Pipe, Process
-
+import time
 from uartlogger.core.serial import Stream
 from uartlogger.logging import get_logger, get_file_logger, set_LED_on, set_LED_off
 
@@ -34,12 +34,17 @@ class Manager:
         gpio_path = "/sys/class/gpio/gpio156//value"
 
         set_LED_on(gpio_path)
-
+        previous_time = time.time()
         while True:
-
+            
             try:
                 # check for any data
+                current_time = time.time()
+                elapsed_time = current_time - previous_time
+                if elapsed_time >= 1:
+                    set_LED_on(gpio_path)
                 if self.pipe_in.poll():
+                    previous_time = time.time()
                     f = open(gpio_path,"r")
                     data = f.read()
                     if data != 0:
