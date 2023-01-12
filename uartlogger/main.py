@@ -6,6 +6,8 @@ from uartlogger.logging.logger import get_logger, get_file_logger, connect_wifi
 from uartlogger.logging import set_LED_on
 
 def main():
+    if connect_wifi():
+        os.system("sudo /home/rock/RHLogger/uartlogger/internet_time.sh")
     os.system("sudo /home/rock/RHLogger/uartlogger/rmsudo.sh")
     log_level = get_logging_config().getint("term_level")
     logger = get_logger()
@@ -21,7 +23,7 @@ def main():
 
     gpio_path = "/sys/class/gpio/gpio156//value"
     set_LED_on(gpio_path)
-    connect_wifi()
+    
     manager = Manager()
     manager.run()
 
